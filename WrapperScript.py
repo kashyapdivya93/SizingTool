@@ -51,7 +51,6 @@ def date_diff_in_Minutes(dt2, dt1):
 location = os.getcwd()
 name = "OfflineCustomerWorkbook-v191219102705.xlsm"
 workbookFile = findWorkbookfile(name, location)
-print(workbookFile)
 timestampStr = datetime.datetime.now().strftime("%d-%b-%Y(%H-%M-%S.%f)")
 os.mkdir('newWorkbookFile_%s' % timestampStr)
 newworkbookFileLocation = location + '\\' + 'newWorkbookFile_%s' % timestampStr
