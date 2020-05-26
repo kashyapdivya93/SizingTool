@@ -32,6 +32,11 @@ def assignZero(n):
     else:
         return n
 
+# Function to find workbook
+def findWorkbookfile(name, location):
+    for root, dirs, files in os.walk(location):
+        if name in files:
+            return os.path.join(root, name)
 
 # Calculate difference between startTime and endTime
 def date_diff_in_Minutes(dt2, dt1):
@@ -45,11 +50,6 @@ def date_diff_in_Minutes(dt2, dt1):
 # Take workbook from MainWorkbook directory and copy in newWorkbookFiles directory, rename workbook
 location = os.getcwd()
 name = "OfflineCustomerWorkbook-v191219102705.xlsm"
-def findWorkbookfile(name, location):
-    for root, dirs, files in os.walk(location):
-        if name in files:
-            return os.path.join(root, name)
-
 workbookFile = findWorkbookfile(name, location)
 print(workbookFile)
 timestampStr = datetime.datetime.now().strftime("%d-%b-%Y(%H-%M-%S.%f)")
