@@ -387,7 +387,7 @@ validateMappingSheet()
 wbk = openpyxl.load_workbook(
     filename=workbookFile, read_only=False, keep_vba=True)
 wks = wbk['DB<->Server Mappings']
-print("Removing values under column Read Optimization Total I/O & Write Optimization Total I/O ...")
+print("Removing values under column Read Optimization Total I/O & Write Optimization Total I/O...")
 for r in range(1, len(row)):
     x = r + 2
     wks.cell(row=x, column=7).value = None
