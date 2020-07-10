@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------------------
 # Script name : ReadServerInputs.py
-# Author      : Nitin Bhagat, Pranav Sriram
+# Author      : Nitin Bhagat
 # Date        : 16-Jan-2020
 # Purpose     : Sizing Tool Automation
 # Parameters  : The script should read all the inputs needed for DB<->Server Mappings
