@@ -1,5 +1,12 @@
-# Author - Pranav Sriram, Nitin Bhagat
-# Wrapper Script
+#---------------------------------------------------------------------------------
+# Script name : WrapperScript.py
+# Author      : Nitin Bhagat, Pranav Sriram
+# Date        : 16-Jan-2020
+# Purpose     : Sizing Tool Automation
+# Parameters  : The script takes 0 parameters
+# Usage       : python3 WrapperScript.py
+#---------------------------------------------------------------------------------
+
 import datetime
 startTime = datetime.datetime.now()
 import time
@@ -13,41 +20,51 @@ import openpyxl
 import statistics
 import os
 import shutil
-# import ReadMacros
 
-# function to convert list to string to pass as a command line argument
+# ---------------------------------------------------------------------------------
+# Function to convert list to string to pass as a command line argument
+# ---------------------------------------------------------------------------------
 def convertToString(listToString):
     return ' '.join(listToString)
 
+# ---------------------------------------------------------------------------------
 # Round function for consistent rounding
+# ---------------------------------------------------------------------------------
 def normal_round(n):
     if n - math.floor(n) < 0.5:
         return math.floor(n)
     return math.ceil(n)
 
+# ---------------------------------------------------------------------------------
 # Function to assign 0 to a variable if empty
+# ---------------------------------------------------------------------------------
 def assignZero(n):
     if len(n)==0:
         return 0
     else:
         return n
 
-# Function to find workbook
+# ---------------------------------------------------------------------------------
+# Function to find workbook file
+# ---------------------------------------------------------------------------------
 def findWorkbookfile(name, location):
     for root, dirs, files in os.walk(location):
         if name in files:
             return os.path.join(root, name)
 
-# Calculate difference between startTime and endTime
+# ---------------------------------------------------------------------------------
+# Function to calculate difference between startTime and endTime
+# ---------------------------------------------------------------------------------
 def date_diff_in_Minutes(dt2, dt1):
   timedelta = dt2 - dt1
   return timedelta.days * 24 * 60 + (timedelta.seconds/60)
 
-# TODO
-# unzip the package given by the customer and provide the whole path in here
-
-
-# Take workbook from MainWorkbook directory and copy in newWorkbookFiles directory, rename workbook
+os.system("cls")
+print("---------------------------------------------------------------------------------")
+print("Taking workbook from MainWorkbook directory")
+print("Copying in newWorkbookFiles directory")
+print("Renaming copied workbook file")
+print("---------------------------------------------------------------------------------")
 location = os.getcwd()
 name = "OfflineCustomerWorkbook-v200330081105.xlsm"
 workbookFile = findWorkbookfile(name, location)
@@ -60,15 +77,20 @@ renamednewworkbookFile = os.path.splitext(newworkbookFile)[0] + "_%s" % (timesta
 os.rename(newworkbookFile, renamednewworkbookFile)
 workbookFile = renamednewworkbookFile
 
-# Take the stage directory as an input
+print("\n\n---------------------------------------------------------------------------------")
+print("Inputting the initial values")
+print("---------------------------------------------------------------------------------")
 stageDirectory = input("Enter the stage directory: ")
 
-# Use BFS to keep track of all Folders present
+# ---------------------------------------------------------------------------------
+# Keep track of all Folders present
+# ---------------------------------------------------------------------------------
 folderQueue = [i for i in os.listdir(
     stageDirectory) if os.path.isdir(stageDirectory + '\\' + i)]
 
-
-# Use DFS to traverse through stage directory and each sub-folder to get to the out files
+# ---------------------------------------------------------------------------------
+# Traverse through stage directory and each sub-folder to get to the out files
+# ---------------------------------------------------------------------------------
 outFiles = []
 currentOutFile = [i for i in os.listdir(stageDirectory) if i.endswith('.out')]
 for files in currentOutFile:
@@ -78,39 +100,19 @@ while len(folderQueue) > 0:
     currentDB = folderQueue.pop(0)
     currentOutFile = [i for i in os.listdir(
         stageDirectory + '\\' + currentDB) if i.endswith('.out')]
-    # if len(currentOutFile) != 0:
-    #     outFiles.append(currentDB + '\\' + currentOutFile[0])
     for files in currentOutFile:
         outFiles.append(currentDB + '\\' + files)
 
-
-
-# take certain inputs
-environmentName = input("Enter the Environment name: ")  # TEST/ DEV/ PROD
+environmentName = input("Enter the Environment name: ")  # TEST/DEV/PROD
 plannedDataGrowth = input("Enter the planned data growth value: ")
 plannedCPUGrowth = input("Enter the planned CPU growth value: ")
+print("\n" * 2)
 
-
-
-'''
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-'''
-
-# Author - Nitin Bhagat
-
-# this section should read all the server model names from servers_m-values.csv
-
+# ---------------------------------------------------------------------------------
+# Read all the server model names from servers_m-values.csv
+# ---------------------------------------------------------------------------------
 stage_directory = stageDirectory
 outFilesString = convertToString(outFiles)
-# environmentName = sys.argv[3]
-# print(environmentName + "cla")
 IOGrowth = plannedCPUGrowth
 outFiles = list(outFilesString.split(" "))
 add_to_excel = {} # Dict of all servers from all AWR files. Key - ServerName, value - ServerModelName
@@ -119,12 +121,12 @@ mean_server = {} # Dict of all servers (keys) containing list of all os_cpu_max 
 allservers = []  # List of all servers
 sum_memUsed = {} # List of all servers with their memUsed
 row = [[]]
-
-# Storing model names in variable
 filename = os.path.join(os.path.dirname(__file__), "servers_m-values.csv")
 # D:\Work\Automation\Sizing\servers_m-values.csv
 
+# ---------------------------------------------------------------------------------
 # Get all ServerModelNames from servers_m-values.csv file
+# ---------------------------------------------------------------------------------
 modelNames = []
 with open(filename) as modelfile:
     reader = csv.reader(modelfile)
@@ -133,23 +135,27 @@ with open(filename) as modelfile:
         modelNames.append(line[1])
 # print(modelNames)
 
-
+# ---------------------------------------------------------------------------------
+# Function to store required values to variable to append to workbook file
+# ---------------------------------------------------------------------------------
 def insertToCSV(environmentName, server, serverModelName, physicalMemory):
     row.append([environmentName, server, serverModelName, physicalMemory])
 
-
+# ---------------------------------------------------------------------------------
+# Function to input Server Model Name if not entered for particular host
+# ---------------------------------------------------------------------------------
 def getServerModelNames(initialServerName):
     res = [i for i in modelNames if initialServerName in i]
     print("\nThe list of Server Model Names based on the keyword are:\n")
+    print("!", '-' * 77, "!")
     for i in res:
         print(i)
-    finalServerName = input(
-        "\nSelect the server model name from the above list\n")
+    print("!", '-' * 77, "!")
+    finalServerName = input("\nSelect the server model name from the above list\n")
     return finalServerName
 
 
 def getAllValues(f1):
-    print("\n.....")
     for line in f1:
         if re.search(r'^DB_NAME*', line):
             databaseName = line
@@ -175,13 +181,10 @@ def getAllValues(f1):
             add_to_excel[servers] = None
             mean_server[servers] = []
             sum_memUsed[servers] = []
-        # if servers not in mean_server:
-        #     mean_server[servers] = []
-        # if servers not in mean_server:
-        #     sum_memUsed[servers] = []
-
-    #####################################################################################################
-    # get BEGIN-MAIN-METRICS & END-MAIN-METRICS line number
+    
+    # ---------------------------------------------------------------------------------
+    # Get BEGIN-MAIN-METRICS & END-MAIN-METRICS line number
+    # ---------------------------------------------------------------------------------
     begin_main_metrics = 0
     end_main_metrics = 0
     for num, line in enumerate(f1, 1):
@@ -197,7 +200,9 @@ def getAllValues(f1):
     start_inst = f1[check_string].find("inst") + 1 # Find the starting position of string "inst"
     end_inst = start_inst + 9 # Find the ending position of string "inst"
     
-    print("Fetching CPU and Memory Utilization Percentage for Database %s from file %s" % (databaseName, outFile))
+    print("\n\n---------------------------------------------------------------------------------")
+    print("Database %s from file %s" % (databaseName, outFile))
+    print("Fetching CPU and Memory Utilization Percentage ...")
     os_cpu_max_list = []  # List of all os_cpu_max entries from an AWR file
     avg_os_cpu_max = 0 # Variable to hold the average of all os_cpu_max from an AWR file
     # Iterate through the above 2 lines
@@ -214,24 +219,18 @@ def getAllValues(f1):
         # Add os_cpu_max to list
         os_cpu_max_list.append(os_cpu_max)
 
-        # Slices the line to include only instance
-        # instance_number = line[start_inst:end_inst]
-        # Removes extra spaces
-        # instance_number = instance_number.strip()
-        # Convert from string to float
-        # instance_number = int(instance_number)
-
-    # Find average of os_cpu_max from list, divide by number of instances
+    print("Finding average of os_cpu_max from above list ...")
     avg_os_cpu_max = statistics.mean(os_cpu_max_list)
 
     # Append the average os_cpu_max of the AWR file as value to the corresponding key (ServerName)
     for servers in server_list:
         mean_server[servers].append(avg_os_cpu_max)
+    
+    time.sleep(3)
 
-    print(".....\n")
-
-    #####################################################################################################
-    # get BEGIN-MEMORY and END-MEMORY line number
+    # ---------------------------------------------------------------------------------
+    # Get BEGIN-MEMORY and END-MEMORY line number
+    # ---------------------------------------------------------------------------------
     begin_memory = 0
     end_memory = 0
     check_string = 0
@@ -252,6 +251,9 @@ def getAllValues(f1):
     start_snap = f1[check_string].find("SNAP_ID") # Find the starting position of string "snap"
     end_snap = start_snap + 7 # Find the ending position of string "snap"
 
+    print("Fetching SGA and PGA ...")
+    print("Calculating Memory Utilization Percentage ...")
+    print("---------------------------------------------------------------------------------")
     sga_list = {}
     pga_list = {}
     max_sga = 0
@@ -281,12 +283,12 @@ def getAllValues(f1):
         if snap not in pga_list:
             pga_list[snap] = 0
 
-        # Add read_iops and write_iops to list for the particular snap ID
+        # Add SGA and PGA to list for the particular snap ID
         sga_list[snap] += sga
         pga_list[snap] += pga
 
 
-    # Get maximum of read_iops and write_iops grouped by snap
+    # Get maximum of SGA and PGA grouped by snap
     keymax_sga = max(sga_list.keys(), key=(lambda k: sga_list[k]))
     max_sga = sga_list[keymax_sga]
     keymax_pga = max(pga_list.keys(), key=(lambda k: pga_list[k]))
@@ -304,37 +306,35 @@ def getAllValues(f1):
     # Append the memUsed to the corresponding key (ServerName)
     for servers in server_list:
         sum_memUsed[servers].append(memUsedPercentage)
+    time.sleep(3)
 
-    print(".....\n")
-    #####################################################################################################
     for i in range(instances):
-        print(".....\n\nDatabase: %s, Host: %s" % (databaseName, server_list[i]))
+        print("\n\n---------------------------------------------------------------------------------")
+        print("Database: %s, Host: %s" % (databaseName, server_list[i]))
+        print("---------------------------------------------------------------------------------")
         if add_to_excel[server_list[i]] == None:
-            initialServerName = input(
-                "\nEnter the Server Model Name keyword (Press 'Enter' to see all): ").upper()
+            initialServerName = input("Enter the Server Model Name keyword (Press 'Enter' to see all): ").upper()
             serverModelName = getServerModelNames(initialServerName)
             add_to_excel[server_list[i]] = serverModelName
         else:
-            print("Fetching ServerModelName from file...")
+            print("Fetching ServerModelName from file ...")
             serverModelName = add_to_excel[server_list[i]]
         if server_list[i] not in allservers:
             allservers.append(server_list[i])
-            insertToCSV(environmentName,
-                        server_list[i], serverModelName, physicalMemory)
+            insertToCSV(environmentName, server_list[i], serverModelName, physicalMemory)
 
-    print(".....\n")
-
-
-# MAIN FUNCTION
+# ---------------------------------------------------------------------------------
+# Main Function
+# ---------------------------------------------------------------------------------
 for outFile in outFiles:
     file = open(stage_directory + '\\' + outFile)
     f1 = file.readlines()
     getAllValues(f1)
     file.close()
 
-print(".\n" * 5)
-
-
+# ---------------------------------------------------------------------------------
+# Append to Workbook file
+# ---------------------------------------------------------------------------------
 wbk = openpyxl.load_workbook(
     filename=workbookFile, read_only=False, keep_vba=True)
 wks = wbk['Database Servers']
@@ -352,35 +352,25 @@ for r in range(1, len(row)):
 wbk.save(workbookFile)
 wbk.close
 
-
-
-'''
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-'''
-
-
+# ---------------------------------------------------------------------------------
 # Thread 1 : call the python script for Reading Database inputs from out files
-subprocess.call(['python', 'ReadDatabaseInputs.py', stageDirectory,
-                 convertToString(outFiles), environmentName, plannedDataGrowth, workbookFile])
+# ---------------------------------------------------------------------------------
+subprocess.call(['python', 'ReadDatabaseInputs.py', stageDirectory, convertToString(outFiles), environmentName, plannedDataGrowth, workbookFile])
 
+# ---------------------------------------------------------------------------------
 # Thread 2: call the python script for Reading Server inputs from out files
-subprocess.call(['python', 'ReadServerInputs.py', stageDirectory,
-                 convertToString(outFiles), environmentName, plannedCPUGrowth, workbookFile])
+# ---------------------------------------------------------------------------------
+subprocess.call(['python', 'ReadServerInputs.py', stageDirectory, convertToString(outFiles), environmentName, plannedCPUGrowth, workbookFile])
 
 
-print("validate mapping sheet 1")
-# ReadMacros.validateMappingSheet()
-print("Script end!")
+print("\n\n---------------------------------------------------------------------------------")
+print("WrapperScript.py SCRIPT END!")
+print("---------------------------------------------------------------------------------")
 
 
+# ---------------------------------------------------------------------------------
 # Print time taken for the entire execution
+# ---------------------------------------------------------------------------------
 endTime = datetime.datetime.now()
 timeDifference = (date_diff_in_Minutes(endTime, startTime))
-print("Execution Time: %.2f minutes" % timeDifference)
+print("\n\nExecution Time: %.2f minutes" % timeDifference)

@@ -1,17 +1,12 @@
-# Author - Pranav Sriram, Nitin Bhagat
+#---------------------------------------------------------------------------------
+# Script name : ReadDatabaseInputs.py
+# Author      : Nitin Bhagat, Pranav Sriram
+# Date        : 16-Jan-2020
+# Purpose     : Sizing Tool Automation
+# Parameters  : The script should read all the inputs needed for DB<->Server Mappings
+# Parent file : WrapperScript.py
+#---------------------------------------------------------------------------------
 
-# this file should read all the inputs needed for database sizing info
-
-# Database name
-# Number of instances
-# Database Vendor
-# Oracle database version
-# Clustered DB ?
-# Total Database Size
-# Redo log Database size - 20 % of Total Database size
-
-# Dependency openpyxl `pip install openpyxl`
-# import ReadMacros
 import openpyxl
 import csv
 import re
@@ -28,28 +23,29 @@ plannedDataGrowth = sys.argv[4]
 workbookFile = sys.argv[5]
 row = [[]]
 
-
+# ---------------------------------------------------------------------------------
+# Function to store required values to variable to append to workbook file
+# ---------------------------------------------------------------------------------
 def insertToCSV(databaseName, instances, dbVersion, clustered, dbSize):
     row.append([environmentName, databaseName, instances, "ORACLE",
                 dbVersion, clustered.upper(), dbSize.replace(',', '.'), plannedDataGrowth])
 
 
 def getAllValues(out_file):
-    # can improve performance at this point
     for line in out_file:
         if re.search(r'^DB_NAME*', line):
             databaseName = line
             databaseName = databaseName[7:]
-
         if re.search(r'^INSTANCES*', line):
             instances = line
             instances = instances[9:]
-
         if re.search(r'^VERSION*', line):
             dbVersion = line
             dbVersion = dbVersion[7:]
 
-    # calculation of database size
+    # ---------------------------------------------------------------------------------
+    # Get BEGIN-SIZE-ON-DISK & END-SIZE-ON-DISK line number
+    # ---------------------------------------------------------------------------------
     endMainMetrics, beginMainMetrics = 0, 0
     for num, line in enumerate(out_file, 1):
         if '~~BEGIN-SIZE-ON-DISK~~' in line:
@@ -62,7 +58,9 @@ def getAllValues(out_file):
     # clustered / non-clustered / shared-nothing
     clustered = "clustered" if int(instances) > 1 else "non-clustered"
 
-    # converting the version from 11.2.0.3 to 11g and respective values
+    # ---------------------------------------------------------------------------------
+    # Converting the version from 11.2.0.3 to 11g and respective values
+    # ---------------------------------------------------------------------------------
     version = dbVersion.strip()
     version = version.rsplit('.', 1)[0]
     version = version.replace('.', '')
@@ -87,22 +85,9 @@ def getAllValues(out_file):
     insertToCSV(databaseName.strip(), instances.strip(), dbVersion,
                 clustered.strip(), dbSize.strip())
 
-
-
-'''
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-'''
-# Author - Nitin Bhagat
-
-# this section should validate the mappings
-
+# ---------------------------------------------------------------------------------
+# Function to validate the mappings
+# ---------------------------------------------------------------------------------
 def validateMappingSheet():
     try:
         print("Validating inputs.... Please click on the excel dialog box")
@@ -119,36 +104,25 @@ def validateMappingSheet():
         print("Error found while running the excel macro!")
         xlApp.Quit()
 
-
-'''
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-############################################################################################################
-'''
-# Author - Nitin Bhagat
-
-# this section should run the main functions
-
-
-
-# checking for values in each out file
+# ---------------------------------------------------------------------------------
+# Main Function
+# ---------------------------------------------------------------------------------
 for outFile in outFiles:
     file = open(stage_directory + '\\' + outFile)
     f1 = file.readlines()
     getAllValues(f1)
     file.close()
 
+# ---------------------------------------------------------------------------------
+# Append to Workbook file
+# ---------------------------------------------------------------------------------
 wbk = openpyxl.load_workbook(
     filename=workbookFile, read_only=False, keep_vba=True)
 wks = wbk['Databases']
-
+print("\n\n---------------------------------------------------------------------------------")
+print("Inserting values in Workbook File ...")
+print("---------------------------------------------------------------------------------")
 for r in range(1, len(row)):
-    print("Inserting Row %d..." % r)
     x = r + 1
     wks.cell(row=x, column=1).value = row[r][0]
     wks.cell(row=x, column=2).value = row[r][1]
@@ -158,11 +132,8 @@ for r in range(1, len(row)):
     wks.cell(row=x, column=6).value = row[r][5]
     wks.cell(row=x, column=7).value = row[r][6]
     wks.cell(row=x, column=15).value = row[r][7]
-
-
 wbk.save(workbookFile)
 wbk.close
-
 
 wbk = openpyxl.load_workbook(
     filename=workbookFile, read_only=False, keep_vba=True)
@@ -170,11 +141,14 @@ wks = wbk['DB<->Server Mappings']
 for r in range(1, len(row)):
     x = r + 1
     wks.cell(row=x, column=1).value = row[r][1]
-
 wbk.save(workbookFile)
 wbk.close
 
-print("validate mapping sheet 2")
+print("\n\n---------------------------------------------------------------------------------")
+print("Validate mapping sheet DB<->Server Mappings")
 validateMappingSheet()
-print("Script end!")
-print("ReadDatabaseInputs.py DONE")
+print("---------------------------------------------------------------------------------")
+
+print("\n\n---------------------------------------------------------------------------------")
+print("ReadDatabaseInputs.py SCRIPT END!")
+print("---------------------------------------------------------------------------------")
