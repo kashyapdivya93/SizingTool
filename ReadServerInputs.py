@@ -134,7 +134,7 @@ def getAllValues(f1):
     keymax_write_iops = max(write_iops_list.keys(), key=(lambda k: write_iops_list[k]))
     max_write_iops = write_iops_list[keymax_write_iops]
 
-    time.sleep(3)
+    # time.sleep(3)
 
     # ---------------------------------------------------------------------------------
     # Get BEGIN-MEMORY & END-MEMORY line number
@@ -201,7 +201,7 @@ def getAllValues(f1):
     keymax_pga = max(pga_list.keys(), key=(lambda k: pga_list[k]))
     max_pga = pga_list[keymax_pga]
 
-    time.sleep(3)
+    # time.sleep(3)
 
     # insert all values to CSV file
     for i in range(instances):
@@ -261,7 +261,7 @@ validateMappingSheet()
 print("---------------------------------------------------------------------------------")
 
 print("\n\n---------------------------------------------------------------------------------")
-print("Removing junk values under required columns ...")
+print("Removing junk values ...")
 print("---------------------------------------------------------------------------------")
 wbk = openpyxl.load_workbook(filename=workbookFile, read_only=False, keep_vba=True)
 wks = wbk['DB<->Server Mappings']
@@ -278,4 +278,4 @@ print("\n\n---------------------------------------------------------------------
 print("ReadServerInputs.py SCRIPT END!")
 print("---------------------------------------------------------------------------------")
 
-time.sleep(3)
+# time.sleep(3)

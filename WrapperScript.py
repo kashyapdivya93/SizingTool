@@ -20,6 +20,7 @@ import openpyxl
 import statistics
 import os
 import shutil
+import win32com.client
 
 # ---------------------------------------------------------------------------------
 # Function to convert list to string to pass as a command line argument
@@ -61,8 +62,7 @@ def date_diff_in_Minutes(dt2, dt1):
 
 os.system("cls")
 print("---------------------------------------------------------------------------------")
-print("Taking workbook from MainWorkbook directory")
-print("Copying in newWorkbookFiles directory")
+print("Copying Main Workbook File to new location in newWorkbookFile directory")
 print("Renaming copied workbook file")
 print("---------------------------------------------------------------------------------")
 location = os.getcwd()
@@ -226,7 +226,7 @@ def getAllValues(f1):
     for servers in server_list:
         mean_server[servers].append(avg_os_cpu_max)
     
-    time.sleep(3)
+    # time.sleep(3)
 
     # ---------------------------------------------------------------------------------
     # Get BEGIN-MEMORY and END-MEMORY line number
@@ -306,7 +306,7 @@ def getAllValues(f1):
     # Append the memUsed to the corresponding key (ServerName)
     for servers in server_list:
         sum_memUsed[servers].append(memUsedPercentage)
-    time.sleep(3)
+    # time.sleep(3)
 
     for i in range(instances):
         print("\n\n---------------------------------------------------------------------------------")
@@ -322,6 +322,28 @@ def getAllValues(f1):
         if server_list[i] not in allservers:
             allservers.append(server_list[i])
             insertToCSV(environmentName, server_list[i], serverModelName, physicalMemory)
+
+
+# ---------------------------------------------------------------------------------
+# Function to upload the workbook
+# ---------------------------------------------------------------------------------
+def uploadMappingSheet():
+    try:
+        xlApp = win32com.client.DispatchEx('Excel.Application')
+        xlsPath = os.path.expanduser(
+            workbookFile)
+        wb = xlApp.Workbooks.Open(Filename=xlsPath)
+        xlApp.Run('Upload')
+        wb.Save()
+        xlApp.Quit()
+        print("Macro ran successfully!")
+        print("\nIn case of any errors while uploading, please check file %s for mandatory fields." % workbookFile)
+        print("Upload Manually once done: RAS -> Upload")
+    except Exception as e:
+        print(e)
+        print("Error found while running the excel macro!")
+        xlApp.Quit()
+
 
 # ---------------------------------------------------------------------------------
 # Main Function
@@ -362,6 +384,11 @@ subprocess.call(['python', 'ReadDatabaseInputs.py', stageDirectory, convertToStr
 # ---------------------------------------------------------------------------------
 subprocess.call(['python', 'ReadServerInputs.py', stageDirectory, convertToString(outFiles), environmentName, plannedCPUGrowth, workbookFile])
 
+
+print("\n\n---------------------------------------------------------------------------------")
+print("Uploading workbook ...")
+uploadMappingSheet()
+print("---------------------------------------------------------------------------------")
 
 print("\n\n---------------------------------------------------------------------------------")
 print("WrapperScript.py SCRIPT END!")
