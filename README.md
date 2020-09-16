@@ -42,7 +42,7 @@ Forecast of Sizing for DB Workloads might take several hours to fill up informat
 - For each Database mentioned in the AWR Minor Files, the above mentioned values will be fetched, upon which calculations will be conducted.
 - The calculations will be uploaded to the workbook and the same will be uploaded to the BAR Tool.
 - The master workbook is present in the **MainWorkbook** directory. The name of the Workbook is **OfflineCustomerWorkbook-v200330081105.xlsm**.
-- On execution, the code will create a copy of the workbook. All changes will be made to the newly created workbook and the same will be uploaded to the BAR Tool. The newly created workbook will be present in a newly created directory. The naming structure of the directory is **newWorkbookFile_*date(time*)** and that of the workbook is **OfflineCustomerWorkbook-v200330081105*_date(time)*.xlsm**.
+- On execution, the code will create a copy of the workbook. All changes will be made to the newly created workbook and the same will be uploaded to the BAR Tool. The newly created workbook will be present in a newly created directory. The naming structure of the directory is **newWorkbookFile_*date(time)*** and that of the workbook is **OfflineCustomerWorkbook-v200330081105*_date(time)*.xlsm**.
 ---
 
 
