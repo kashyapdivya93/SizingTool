@@ -96,5 +96,7 @@ You will receive the following email upon the same.
 ![Upload3](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload3.PNG)
 
 ## STEP 4: Proceed with Sizing
-Head over to the **[BAR Tool](https:http://sizingtool.us.oracle.com)** to complete the Sizing activity.
+Head over to the **[BAR Tool](https://sizingtool.us.oracle.com)** to complete the Sizing activity.
+Alternatively, you can click on the links present in the email which you received.
+
 ### All Done!
