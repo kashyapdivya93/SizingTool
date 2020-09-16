@@ -86,9 +86,11 @@ Provide the given fields:
 - Sizing engagement
 - Deployment platform (dropdown)
 ![Upload1](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload1.PNG)
+
 Click on **Upload** once the values are filled.
 The following message will be displayed once the Upload is complete.
 ![Upload2](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload2.PNG)
+
 You will receive the following email upon the same.
 ![Upload3](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload3.PNG)
 
