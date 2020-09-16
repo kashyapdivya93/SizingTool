@@ -103,9 +103,9 @@ while len(folderQueue) > 0:
     for files in currentOutFile:
         outFiles.append(currentDB + '\\' + files)
 
-environmentName = input("Enter the Environment name: ")  # TEST/DEV/PROD
-plannedDataGrowth = input("Enter the planned data growth value: ")
-plannedCPUGrowth = input("Enter the planned CPU growth value: ")
+environmentName = input("Enter the Environment name (TEST/PROD/DEV): ")
+plannedDataGrowth = input("Enter the Planned Data Growth Value (%): ")
+plannedCPUGrowth = input("Enter the Planned CPU Growth Value (%): ")
 print("\n" * 2)
 
 # ---------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ def getServerModelNames(initialServerName):
     for i in res:
         print(i)
     print("!", '-' * 77, "!")
-    finalServerName = input("\nSelect the server model name from the above list\n")
+    finalServerName = input("\nEnter the Server Model Name fetched from the above list:\n")
     return finalServerName
 
 
