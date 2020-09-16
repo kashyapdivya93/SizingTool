@@ -26,7 +26,7 @@ Forecase of Sizing for DB Workloads might take several hours to fill up informat
 ### Prerequisites
 - Create a Stage Directory and place all AWR Minor Files in the same. The Stage Directory can have sub-folders within itself as well.
   
-    ![](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Tree.PNG)
+    ![](./blob/nitin/Images/Tree.PNG)
 - Download & Install **[Python3](https://www.python.org/downloads/)**.
 - Install the Python module pip:
   ```
@@ -47,7 +47,7 @@ $ python -m pip install pywin32
 
 ## STEP 2: Execute
 ```
-python WrapperScript.py
+$ python WrapperScript.py
 ```
 
 - To access the Data Discovery wizard, click the **Home** tab, and then click **Data Discovery**.
