@@ -3,8 +3,6 @@
 ## Introduction
 Budgetary Architecture Recommendation (BAR) provides Capacity Planning solutions for customer's IT landscape. The centralized self-service tool helps qualify, scope and budget customer opportunities. BAR addresses Greenfield and existing/consolidation deployments of Applications, Technology and Systems for On-Premise and Cloud implementations.
 
-To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.
-
 ### Challenge
 Forecase of Sizing for DB Workloads might take several hours to fill up information into Bartool. It may take an average of 8-10 hours and more than one technical resource to input paramters manually against Opportunity on the BAR Tool for Medium-sized workload.
 
@@ -26,11 +24,15 @@ Forecase of Sizing for DB Workloads might take several hours to fill up informat
 - Create Deployment Scenario and run for future state architecture prediction.
 
 ### Prerequisites
-- Download & Install **[Python3](https://www.python.org/downloads/)**
-- Install the following Python module:
-  - openpyxl ```pip install openpyxl```
-  - statistics ```pip install statistics```
-  - pywin32 ```python -m pip install pywin32```
+- Create a Stage Directory and place all AWR Minor Files in the same. The Stage Directory can have sub-folders within itself as well.
+  ![](./Images/Tree.png " ")
+- Download & Install **[Python3](https://www.python.org/downloads/)**.
+- Install the following Python modules:
+  - openpyxl - ```pip install openpyxl```
+  - statistics - ```pip install statistics```
+  - pywin32 - ```python -m pip install pywin32```
+
+---
 
 ## STEP 1: Sign in to the Oracle Data Safe Console for your region
 - Go to your ATP details page.
