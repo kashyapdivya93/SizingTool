@@ -1,7 +1,7 @@
 # Sizing Tool Automation
 
 ## Introduction
-Budgetary Architecture Recommendation (BAR) provides Capacity Planning solutions for customer's IT landscape. The centralized self-service tool helps qualify, scope and budget customer opportunities. BAR addresses Greenfield and existing/consolidation deployments of Applications, Technology and Systems for On-Premise and Cloud implementations.
+**Budgetary Architecture Recommendation (BAR)** provides Capacity Planning solutions for customer's IT landscape. The centralized self-service tool helps qualify, scope and budget customer opportunities. BAR addresses Greenfield and existing/consolidation deployments of Applications, Technology and Systems for On-Premise and Cloud implementations.
 
 ### Challenge
 Forecase of Sizing for DB Workloads might take several hours to fill up information into Bartool. It may take an average of 8-10 hours and more than one technical resource to input paramters manually against Opportunity on the BAR Tool for Medium-sized workload.
