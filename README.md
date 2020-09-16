@@ -38,13 +38,17 @@ Forecase of Sizing for DB Workloads might take several hours to fill up informat
 
 ## STEP 1: Install
 ```
-git clone https://github.com/nitinnbbhagat/SizingTool.git
-cd SizingTool
-pip install openpyxl
-pip install statistics
-python -m pip install pywin32
+$ git clone https://github.com/nitinnbbhagat/SizingTool.git
+$ cd SizingTool
+$ pip install openpyxl
+$ pip install statistics
+$ python -m pip install pywin32
 ```
-## STEP 2: Use the Data Discovery wizard to discover sensitive data
+
+## STEP 2: Execute
+```
+python WrapperScript.py
+```
 
 - To access the Data Discovery wizard, click the **Home** tab, and then click **Data Discovery**.
 
