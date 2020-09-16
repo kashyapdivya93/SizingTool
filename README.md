@@ -25,7 +25,7 @@ Forecase of Sizing for DB Workloads might take several hours to fill up informat
 
 ### Prerequisites
 - Create a Stage Directory and place all AWR Minor Files in the same. The Stage Directory can have sub-folders within itself as well.
-  ![](./Images/Tree.png " ")
+  ![](./Images/Tree.png)
 - Download & Install **[Python3](https://www.python.org/downloads/)**.
 - Install the following Python modules:
   - openpyxl - ```pip install openpyxl```
