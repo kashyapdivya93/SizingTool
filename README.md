@@ -41,7 +41,8 @@ Forecase of Sizing for DB Workloads might take several hours to fill up informat
 - Each host present in each of the files will be mapped to a Server Model, which will be inputted by the User.
 - For each Database mentioned in the AWR Minor Files, the above mentioned values will be fetched, upon which calculations will be conducted.
 - The calculations will be uploaded to the workbook and the same will be uploaded to the BAR Tool.
-
+- The master workbook is present in the **MainWorkbook** directory. The name of the Workbook is **OfflineCustomerWorkbook-v200330081105.xlsm**.
+- On execution, the code will create a copy of the workbook. All changes will be made to the newly created workbook and the same will be uploaded to the BAR Tool. The newly created workbook will be present in a newly created directory. The naming structure of the directory is **newWorkbookFile_*date(time*)** and that of the workbook is **OfflineCustomerWorkbook-v200330081105*_date(time)*.xlsm**.
 ---
 
 
@@ -66,8 +67,30 @@ $ python WrapperScript.py
    - Planned CPU Growth Value
 
    ![Initial Values](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/InitialValues.PNG)
-- Search for the Server Model Name according to the keyword. The values are fetched from the ```servers_m-values.csv``` file present in the working code directory.
+- Search for the Server Model Name according to a keyword. The values are fetched from the ```servers_m-values.csv``` file present in the working code directory.
 - Copy the correct Server Model Name from the list shown in the terminal and proceed with the execution.
    ![Server Model Name](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/ServerModelName.png)
+- Once all the values are fetched from each AWR Minor Files, Validate the sheet.
+   ![Validate1](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Validate1.PNG)
+   ![Validate2](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Validate2.PNG)
+   ![Validate3](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Validate3.PNG)
+- The Validation takes place thrice in the complete execution of the code:
+   - ReadDatabaseInputs.py
+   - ReadServerInputs.py
+   - Upload Workbook process
+
+
+## STEP 2: Upload
+Provide the given fields:
+- Contact email address or drop box name
+- Sizing engagement
+- Deployment platform (dropdown)
+![Upload1](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload1.PNG)
+Click on **Upload** once the values are filled.
+The following message will be displayed once the Upload is complete.
+![Upload2](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload2.PNG)
+You will receive the following email upon the same.
+![Upload3](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload3.PNG)
+
 
 ### All Done!
