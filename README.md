@@ -28,17 +28,22 @@ Forecase of Sizing for DB Workloads might take several hours to fill up informat
   
     ![](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Tree.PNG)
 - Download & Install **[Python3](https://www.python.org/downloads/)**.
-- Install the following Python modules:
-  - openpyxl - ```pip install openpyxl```
-  - statistics - ```pip install statistics```
-  - pywin32 - ```python -m pip install pywin32```
+- Install the Python module pip:
+  ```
+  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  python get-pip.py
+  ```
 
 ---
 
-## STEP 1: Sign in to the Oracle Data Safe Console for your region
-- Go to your ATP details page.
-- Click on View Console under **Data Safe** status.
-
+## STEP 1: Install
+```
+git clone https://github.com/nitinnbbhagat/SizingTool.git
+cd SizingTool
+pip install openpyxl
+pip install statistics
+python -m pip install pywin32
+```
 ## STEP 2: Use the Data Discovery wizard to discover sensitive data
 
 - To access the Data Discovery wizard, click the **Home** tab, and then click **Data Discovery**.
