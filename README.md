@@ -4,7 +4,7 @@
 **Budgetary Architecture Recommendation (BAR)** provides Capacity Planning solutions for customer's IT landscape. The centralized self-service tool helps qualify, scope and budget customer opportunities. BAR addresses Greenfield and existing/consolidation deployments of Applications, Technology and Systems for On-Premise and Cloud implementations.
 
 ### Challenge
-Forecast of Sizing for DB Workloads might take several hours to fill up information into Bartool. It may take an average of 8-10 hours and more than one technical resource to input paramters manually against Opportunity on the BAR Tool for Medium-sized workload.
+Forecast of Sizing for DB Workloads might take several hours to fill up information into BAR Tool. It may take an average of 8-10 hours and more than one technical resource to input paramters manually against Opportunity on the BAR Tool for Medium-sized workload.
 
 ### Current Procedure
 - AWR Minor Files uploaded onto BAR Tool using Console against Opportunity created in bulk/indivudual file upload mode.
