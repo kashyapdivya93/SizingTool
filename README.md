@@ -80,11 +80,12 @@ $ python WrapperScript.py
    - Upload Workbook process
 
 
-## STEP 2: Upload
+## STEP 3: Upload
 Provide the given fields:
 - Contact email address or drop box name
 - Sizing engagement
 - Deployment platform (dropdown)
+
 ![Upload1](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload1.PNG)
 
 Click on **Upload** once the values are filled.
@@ -94,5 +95,6 @@ The following message will be displayed once the Upload is complete.
 You will receive the following email upon the same.
 ![Upload3](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload3.PNG)
 
-
+## STEP 4: Proceed with Sizing
+Head over to the **[BAR Tool](https:http://sizingtool.us.oracle.com)** to complete the Sizing activity.
 ### All Done!
