@@ -1,30 +1,36 @@
-# Discover Sensitive Data with Oracle Data Safe
+# Sizing Tool Automation
 
 ## Introduction
-Using Oracle Data Safe, discover sensitive data in a target database with the Data Discovery wizard and identify dictionary-based and non-dictionary referential relationships, in a sensitive data model, to modify and analyze results and reports.
+Budgetary Architecture Recommendation (BAR) provides Capacity Planning solutions for customer's IT landscape. The centralized self-service tool helps qualify, scope and budget customer opportunities. BAR addresses Greenfield and existing/consolidation deployments of Applications, Technology and Systems for On-Premise and Cloud implementations.
 
 To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.
 
-### Objectives
-In this lab, you learn how to do the following:
-- Discover sensitive data in a target database with the Data Discovery wizard.
-- Identify dictionary-based and non-dictionary referential relationships in a sensitive data model.
-- Modify a sensitive data model in the Data Discovery wizard and perform incremental updates.
-- Analyze the data discovery results and report.
-- View, download, and delete a sensitive data model from the Library.
-
 ### Challenge
-Suppose that you want to share your database with the Research and Development (R&D) team for a project that they are working on. The database contains sensitive data, therefore, you first need to understand what sensitive data you have so that you can mask it before sharing it with the R&D team.
+Forecase of Sizing for DB Workloads might take several hours to fill up information into Bartool. It may take an average of 8-10 hours and more than one technical resource to input paramters manually against Opportunity on the BAR Tool for Medium-sized workload.
 
-While you are working on the challenge, think about the following questions:
-- What are the top-level categories of predefined sensitive types?
-- What is the purpose of the "Non-dictionary referential relationships discovery" option?
-- How many potential non-dictionary referential relationships did you discover?
-- Do the majority of your sensitive columns fall under certain sensitive categories or is it fairly distributed?
-- Did you find any false positives?
-- Does your sensitive data model include any referential relationships? Can you remove them?
-- How many sensitive columns and sensitive types did you discover?
-- How many tables contain the discovered sensitive columns?
+### Current Procedure
+- AWR Minor Files uploaded onto BAR Tool using Console against Opportunity created in bulk/indivudual file upload mode.
+- Summarized CSV is generated for uploaded files which contains required parameters such as:
+  - Memory (GB)
+  - Memory Peak Utilization (%)
+  - CPU Peak Utilization (%)
+  - Database Name
+  - Server Name
+  - RAC/Non-RAC Database
+  - Database Management System Vendor
+  - Database Version
+  - Database Sizer (GB)
+  - Read & Write IOPS
+  - SGA & PGA
+- Using the summarized CSV file, create a Worklad and manually input above mentioned paramters in Console.
+- Create Deployment Scenario and run for future state architecture prediction.
+
+### Prerequisites
+- Download & Install **[Python3](https://www.python.org/downloads/)**
+- Install the following Python module:
+  - openpyxl ```pip install openpyxl```
+  - statistics ```pip install statistics```
+  - pywin32 ```python -m pip install pywin32```
 
 ## STEP 1: Sign in to the Oracle Data Safe Console for your region
 - Go to your ATP details page.
