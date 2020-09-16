@@ -97,6 +97,7 @@ You will receive the following email upon the same.
 
 ## STEP 4: Proceed with Sizing
 Head over to the **[BAR Tool](sizingtool.us.oracle.com)** to complete the Sizing activity.
+<br>
 Alternatively, you can click on the links present in the email which you received.
 
 ### All Done!
