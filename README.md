@@ -101,6 +101,6 @@ Head over to the **[BAR Tool](http://sizingtool.us.oracle.com)** to complete the
 Alternatively, you can click on the links present in the email which you received.
 
 > **Note:**<br>
-* Screenshots have been masked to protect identity.
+\* Screenshots have been masked to protect identity.
 
 ### All Done!
