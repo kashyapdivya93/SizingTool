@@ -26,7 +26,7 @@ Forecast of Sizing for DB Workloads might take several hours to fill up informat
 ### Prerequisites
 - Create a Stage Directory and place all AWR Minor Files in the same. The Stage Directory can have sub-folders within itself as well.
   
-   ![Tree Structure](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Tree.PNG)
+   ![Tree Structure](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Tree.PNG) *
 - Download & Install **[Python3](https://www.python.org/downloads/)**.
 - Install the Python module pip:
    ```
@@ -69,7 +69,7 @@ $ python WrapperScript.py
    ![Initial Values](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/InitialValues.PNG)
 - Search for the Server Model Name according to a keyword. The values are fetched from the ```servers_m-values.csv``` file present in the working code directory.
 - Copy the correct Server Model Name from the list shown in the terminal and proceed with the execution.
-   ![Server Model Name](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/ServerModelName.png)
+   ![Server Model Name](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/ServerModelName.png) *
 - Once all the values are fetched from each AWR Minor Files, Validate the sheet.
    ![Validate1](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Validate1.PNG)
    ![Validate2](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Validate2.PNG)
@@ -86,18 +86,21 @@ Provide the given fields:
 - Sizing engagement
 - Deployment platform (dropdown)
 
-![Upload1](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload1.PNG)
+![Upload1](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload1.PNG) *
 
 Click on **Upload** once the values are filled.
 The following message will be displayed once the Upload is complete.
-![Upload2](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload2.PNG)
+![Upload2](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload2.PNG) *
 
 You will receive the following email upon the same.
-![Upload3](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload3.PNG)
+![Upload3](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Upload3.PNG) *
 
 ## STEP 4: Proceed with Sizing
 Head over to the **[BAR Tool](http://sizingtool.us.oracle.com)** to complete the Sizing activity.
 <br>
 Alternatively, you can click on the links present in the email which you received.
+
+> **Note:**<br>
+* Screenshots have been masked to protect identity.
 
 ### All Done!
