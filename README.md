@@ -28,7 +28,7 @@ Forecast of Sizing for DB Workloads might take several hours to fill up informat
   
    ![Tree Structure](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Tree.PNG)
 - Download & Install **[Python3](https://www.python.org/downloads/)**.
-- Install the Python module pip:
+- Install the Python module **[pip](https://pypi.org/project/pip/)**:
    ```
    $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
    $ python get-pip.py
