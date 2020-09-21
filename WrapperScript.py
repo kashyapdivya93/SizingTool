@@ -80,7 +80,14 @@ workbookFile = renamednewworkbookFile
 print("\n\n---------------------------------------------------------------------------------")
 print("Inputting the initial values")
 print("---------------------------------------------------------------------------------")
-stageDirectory = input("Enter the stage directory: ")
+while True:
+    stageDirectory = input("Enter the stage directory: ")
+    if os.path.isdir(stageDirectory):
+        break
+    else:
+        print("!", '-' * 77, "!")
+        print("Directory does not exist. Please try again.")
+        print("!", '-' * 77, "!\n")
 
 # ---------------------------------------------------------------------------------
 # Keep track of all Folders present
@@ -103,9 +110,20 @@ while len(folderQueue) > 0:
     for files in currentOutFile:
         outFiles.append(currentDB + '\\' + files)
 
-environmentName = input("Enter the Environment name (TEST/PROD/DEV): ")
-plannedDataGrowth = input("Enter the Planned Data Growth Value (%): ")
-plannedCPUGrowth = input("Enter the Planned CPU Growth Value (%): ")
+while True:
+    environmentName = input("Enter the Environment name (TEST/PROD/DEV): ").upper()
+    if environmentName not in ('TEST', 'PROD', 'DEV'):
+        print("!", '-' * 77, "!")
+        print("Incorrect environment. Please try again.")
+        print("!", '-' * 77, "!\n")
+    else:
+        break
+plannedDataGrowth = input("Enter the Planned Data Growth Value % [10]: ")
+if len(plannedDataGrowth)==0:
+    plannedDataGrowth = str(10)
+plannedCPUGrowth = input("Enter the Planned CPU Growth Value % [10]: ")
+if len(plannedCPUGrowth)==0:
+    plannedCPUGrowth = str(10)
 print("\n" * 2)
 
 # ---------------------------------------------------------------------------------
@@ -146,13 +164,22 @@ def insertToCSV(environmentName, server, serverModelName, physicalMemory):
 # ---------------------------------------------------------------------------------
 def getServerModelNames(initialServerName):
     res = [i for i in modelNames if initialServerName in i]
+    if len(res)==0:
+        return 0
     print("\nThe list of Server Model Names based on the keyword are:\n")
     print("!", '-' * 77, "!")
     for i in res:
         print(i)
     print("!", '-' * 77, "!")
-    finalServerName = input("\nEnter the Server Model Name fetched from the above list:\n")
-    return finalServerName
+    while True:
+        finalServerName = input("\nEnter the Server Model Name fetched from the above list:\n")
+        if finalServerName not in modelNames:
+            print("!", '-' * 77, "!")
+            print("Incorrect Model Server Name. Please try again.")
+            print("!", '-' * 77, "!")
+        else:
+            return finalServerName
+            break
 
 
 def getAllValues(f1):
@@ -313,9 +340,16 @@ def getAllValues(f1):
         print("Database: %s, Host: %s" % (databaseName, server_list[i]))
         print("---------------------------------------------------------------------------------")
         if add_to_excel[server_list[i]] == None:
-            initialServerName = input("Enter the Server Model Name keyword (Press 'Enter' to see all): ").upper()
-            serverModelName = getServerModelNames(initialServerName)
-            add_to_excel[server_list[i]] = serverModelName
+            while True:
+                initialServerName = input("Enter the Server Model Name keyword (Press 'Enter' to see all): ").upper()
+                serverModelName = getServerModelNames(initialServerName)
+                if serverModelName==0:
+                    print("!", '-' * 77, "!")
+                    print("Keyword fetched an empty list. Please try again.")
+                    print("!", '-' * 77, "!\n")
+                else:
+                    add_to_excel[server_list[i]] = serverModelName
+                    break
         else:
             print("Fetching ServerModelName from file ...")
             serverModelName = add_to_excel[server_list[i]]

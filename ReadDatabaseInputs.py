@@ -90,7 +90,7 @@ def getAllValues(out_file):
 # ---------------------------------------------------------------------------------
 def validateMappingSheet():
     try:
-        print("Validating inputs.... Please click on the excel dialog box")
+        print("Validating inputs... Please click on the excel dialog box")
         xlApp = win32com.client.DispatchEx('Excel.Application')
         xlsPath = os.path.expanduser(
             workbookFile)
