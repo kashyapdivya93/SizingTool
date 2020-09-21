@@ -71,7 +71,7 @@ $ python WrapperScript.py
 - Search for the Server Model Name according to a keyword. The values are fetched from the ```servers_m-values.csv``` file present in the working code directory.
 - Copy the correct Server Model Name from the list shown in the terminal and proceed with the execution.
    ![Server Model Name](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/ServerModelName.png)
-- Once all the values are fetched from each AWR Minor Files, Validate the sheet.
+- Once all the values are fetched from each AWR Minor Files, validate the sheet.
    ![Validate1](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Validate1.PNG)
    ![Validate2](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Validate2.PNG)
    ![Validate3](https://github.com/nitinnbbhagat/SizingTool/blob/nitin/Images/Validate3.PNG)
